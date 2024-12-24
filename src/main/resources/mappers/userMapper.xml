@@ -5,8 +5,9 @@
 <mapper namespace="com.hermes.hermes.mapper.UserMapper">
 
     <select id="getAllUsers" >
-        SELECT * FROM USERPROFILE
+        SELECT * FROM USER
     </select>
+
 
 
 
