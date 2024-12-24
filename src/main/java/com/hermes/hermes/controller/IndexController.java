@@ -38,4 +38,9 @@ public class IndexController {
         userService.insertUser(user);
         return "Signup-Success";
     }
+
+    @GetMapping("/Product_Details_Page")
+    public String Product_Details_Page(Model model) {
+        return "Product_Details_Page";
+    }
 }

@@ -1,10 +1,102 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes-Product_Details_Page</title>
+    <link href="/css/styles.css" rel="stylesheet">
+    <style>
+        .product-container {
+            display: flex;
+            justify-content: center;
+            align-items: flex-start;
+            padding: 40px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .product-image {
+            width: 300px;
+            height: 300px;
+            object-fit: contain;
+            margin-right: 40px;
+        }
+
+        .product-details {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .product-details h1 {
+            font-size: 2em;
+            margin: 0;
+        }
+
+        .product-details p {
+            font-size: 1.1em;
+            margin: 10px 0;
+        }
+
+        .product-description {
+            margin-bottom: 20px;
+            font-size: 1.2em;
+            color: #666;
+        }
+
+        .size-selector {
+            margin-bottom: 20px;
+        }
+
+        select {
+            padding: 8px;
+            font-size: 1em;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .buy-button {
+            background-color: green;
+            color: white;
+            padding: 15px 30px;
+            font-size: 1.2em;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .buy-button:hover {
+            background-color: darkgreen;
+        }
+    </style>
 </head>
 <body>
+<th:block th:replace="~{layout/header :: header}"></th:block>
 
+<div class="product-container">
+    <div class="product-image">
+        <img th:src="@{/{productId}/image}" alt="제품 이미지" />
+    </div>
+    <div class="product-details">
+        <h1 th:text="${product.name}">제품명</h1>
+        <p>가격: <strong th:text="${product.price}">₩XX,XXX</strong></p>
+        <div class="product-description">
+            <p th:text="${product.description}">상품 간략 설명</p>
+        </div>
+        <div class="size-selector">
+            <label for="size">신발 사이즈 선택:</label>
+            <select id="size" name="size">
+                <option th:value="${product.sizes[0]}" th:text="${product.sizes[0]}">250mm</option>
+                <option th:value="${product.sizes[1]}" th:text="${product.sizes[1]}">260mm</option>
+                <option th:value="${product.sizes[2]}" th:text="${product.sizes[2]}">270mm</option>
+                <option th:value="${product.sizes[3]}" th:text="${product.sizes[3]}">280mm</option>
+            </select>
+        </div>
+        <button class="buy-button" th:onclick="|buyProduct(${product.id})|">구매하기</button>
+    </div>
+</div>
+
+<th:block th:replace="~{layout/footer :: footer}"></th:block>
 </body>
 </html>

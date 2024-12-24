@@ -84,12 +84,11 @@
 <th:block th:replace="~{layout/header :: header}"></th:block>
         <div class="signup-container">
             <form action="/Signup-Success" method="post" id="signupForm">
-                <h1>회원가입</h1>
                 <label for="user_id">아이디</label>
-                <input type="text" id="user_id" name="user_id" required>
+                <input type="text" id="user_id" name="user_id" required pattern="^[a-zA-Z0-9_]{5,20}$" title="아이디는 알파벳, 숫자, 언더스코어로 이루어진 5~20자여야 합니다.">
 
                 <label for="user_pw">비밀번호</label>
-                <input type="password" id="user_pw" name="user_pw" required>
+                <input type="password" id="user_pw" name="user_pw" required pattern="^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d@$!%*?&]{8,}$" title="비밀번호는 최소 8자 이상이어야 하며, 대소문자, 숫자, 특수문자가 포함되어야 합니다.">
 
                 <label for="confirmPassword">비밀번호 확인</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
@@ -97,24 +96,90 @@
                 <p id="message"></p>
 
                 <label for="user_name">사용자 이름</label>
-                <input type="text" id="user_name" name="user_name" required>
+                <input type="text" id="user_name" name="user_name" required pattern="^[a-zA-Z가-힣]{2,30}$" title="사용자 이름은 한글과 영어만 포함되어야 하며, 2~30자여야 합니다.">
 
                 <!-- 본인 확인용 질문 추가 -->
-                <label for="user_verification_answer">본인 확인용 질문</label>
-                <select id="user_verification_answer" name="user_verification_answer" required>
+                <label for="securityAnswer">본인 확인용 질문</label>
+                <select id="securityAnswer" name="securityAnswer" required>
                     <option value="">질문을 선택하세요</option>
                     <option value="birthCity">출생 도시는 어디인가요?</option>
                     <option value="firstSchool">첫 번째 학교 이름은 무엇인가요?</option>
                     <option value="favoriteFood">가장 좋아하는 음식은 무엇인가요?</option>
                 </select>
 
-                <label for="securityAnswer">질문의 답</label>
-                <input type="text" id="securityAnswer" name="securityAnswer" placeholder="답변을 입력해주세요." required>
-
+                <label for="user_verification_answer">질문의 답</label>
+                <input type="text" id="user_verification_answer" name="user_verification_answer" placeholder="답변을 입력해주세요." required pattern="^[^\s]+$" title="답변은 공백을 제외한 텍스트만 포함되어야 합니다.">
 
                 <button type="submit">회원가입</button>
             </form>
-        <script src="/js/signup.js"></script>
+
+            <script>
+                document.getElementById("signupForm").addEventListener("submit", function(event) {
+                    event.preventDefault(); // 기본 제출 동작 막기
+
+                    const password = document.getElementById("user_pw").value;
+                    const confirmPassword = document.getElementById("confirmPassword").value;
+                    const message = document.getElementById("message");
+
+                    // 1. 비밀번호 확인
+                    if (password !== confirmPassword) {
+                        message.textContent = "비밀번호가 일치하지 않습니다. 다시 입력해주세요.";
+                        message.className = "error";
+                        return; // 비밀번호가 일치하지 않으면 더 이상 검증하지 않고 종료
+                    } else {
+                        message.textContent = "비밀번호가 일치합니다.";
+                        message.className = "success";
+                    }
+
+                    // 2. 정규식 검증
+                    const userId = document.getElementById("user_id");
+                    const userPw = document.getElementById("user_pw");
+                    const userName = document.getElementById("user_name");
+                    const securityAnswer = document.getElementById("user_verification_answer");
+
+                    // 아이디 정규식 검증
+                    const userIdPattern = /^[a-zA-Z0-9_]{5,20}$/;
+                    if (!userIdPattern.test(userId.value)) {
+                        message.textContent = "아이디는 알파벳, 숫자, 언더스코어로 이루어진 5~20자여야 합니다.";
+                        message.className = "error";
+                        event.preventDefault();
+                        return;
+                    }
+
+                    // 비밀번호 정규식 검증
+                    const pwPattern = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d@$!%*?&]{8,}$/;
+                    if (!pwPattern.test(userPw.value)) {
+                        message.textContent = "비밀번호는 최소 8자 이상이어야 하며, 대소문자, 숫자, 특수문자가 포함되어야 합니다.";
+                        message.className = "error";
+                        event.preventDefault();
+                        return;
+                    }
+
+                    // 사용자 이름 정규식 검증 (한글, 영어만 허용)
+                    const userNamePattern = /^[a-zA-Z가-힣]{2,30}$/;
+                    if (!userNamePattern.test(userName.value)) {
+                        message.textContent = "사용자 이름은 한글과 영어만 포함되어야 하며, 2~30자여야 합니다.";
+                        message.className = "error";
+                        event.preventDefault();
+                        return;
+                    }
+
+                    // 답변 정규식 검증
+                    const answerPattern = /^[^\s]+$/;
+                    if (!answerPattern.test(securityAnswer.value)) {
+                        message.textContent = "답변은 공백을 제외한 텍스트만 포함되어야 합니다.";
+                        message.className = "error";
+                        event.preventDefault();
+                        return;
+                    }
+
+                    // 모든 검증이 통과하면 폼 제출
+                    message.textContent = "회원가입이 완료되었습니다.";
+                    message.className = "success";
+                    this.submit(); // 폼 제출
+                });
+            </script>
+
         </div>
 
 
