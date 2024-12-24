@@ -5,7 +5,17 @@
 <mapper namespace="com.hermes.hermes.mapper.UserMapper">
 
     <select id="getAllUsers" >
-        SELECT * FROM USERPROFILE
+        SELECT * FROM USER
+    </select>
+    <insert id="insertUser">
+        INSERT INTO USER(ID,NAME,PASSWORD,user_verification_answer)
+        VALUES
+            (#{id},#{name},#{password},#{user_verification_answer})
+    </insert>
+    <select id="findByUsername">
+        SELECT NAME
+        FROM USER
+        WHERE NAME = #{name}
     </select>
 
 

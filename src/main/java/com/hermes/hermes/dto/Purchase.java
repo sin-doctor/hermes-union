@@ -1,5 +1,12 @@
 package com.hermes.hermes.dto;
 
+import lombok.*;
+
+@NoArgsConstructor
+@AllArgsConstructor
+@Getter
+@Setter
+@ToString
 public class Purchase {
     private int purchase_reg_num;
     public String purchase_id;
