@@ -6,15 +6,6 @@
     <title>Hermes-Signup</title>
     <link href="/css/styles.css" rel="stylesheet">
     <style>
-        .sign-in {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            position: absolute;
-            top: 40px;
-            right: 40px;
-        }
-
         .sign-in a {
             text-decoration: none;
             color: black;
@@ -29,8 +20,8 @@
         /* 회원가입 컨테이너 스타일 */
         .signup-container {
             max-width: 400px;
-            margin: 50px auto;
-            padding: 20px;
+            margin: 40px auto;
+            padding: 100px;
             border: 1px solid #ddd;
             border-radius: 10px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -92,21 +83,21 @@
 <body>
 <th:block th:replace="~{layout/header :: header}"></th:block>
         <div class="signup-container">
-            <form action="/signup-Success" method="post" id="signupForm">
+            <form action="/Signup-Success" method="post" id="signupForm">
                 <h1>회원가입</h1>
-                <label for="Id">아이디</label>
-                <input type="text" id="Id" name="Id" required>
+                <label for="user_id">아이디</label>
+                <input type="text" id="user_id" name="user_id" required>
 
-                <label for="password">비밀번호</label>
-                <input type="password" id="password" name="password" required>
+                <label for="user_pw">비밀번호</label>
+                <input type="password" id="user_pw" name="user_pw" required>
 
                 <label for="confirmPassword">비밀번호 확인</label>
                 <input type="password" id="confirmPassword" name="confirmPassword" required>
 
                 <p id="message"></p>
 
-                <label for="name">사용자 이름</label>
-                <input type="text" id="name" name="name" required>
+                <label for="user_name">사용자 이름</label>
+                <input type="text" id="user_name" name="user_name" required>
 
                 <!-- 본인 확인용 질문 추가 -->
                 <label for="user_verification_answer">본인 확인용 질문</label>
@@ -123,8 +114,9 @@
 
                 <button type="submit">회원가입</button>
             </form>
+        <script src="/js/signup.js"></script>
         </div>
-<script src="/js/signup.js"></script>
+
 
 
 <th:block th:replace="~{layout/footer :: footer}"></th:block>

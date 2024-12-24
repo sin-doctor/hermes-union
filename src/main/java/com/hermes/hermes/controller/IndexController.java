@@ -26,12 +26,16 @@ public class IndexController {
 
     @GetMapping("/Signup")
     public String signup() {
-        return "signup";
+        return "Signup";
     }
-    @PostMapping("/Signup-success")
-    public String signupSuccess(@ModelAttribute User user, Model model) {
+
+    @PostMapping("/Signup-Success")
+    public String signup(@ModelAttribute User user) {
+        if (user.getUser_id() == null || user.getUser_id().isEmpty()) {
+            throw new IllegalArgumentException("User ID is required");
+        }
+
         userService.insertUser(user);
-        model.addAttribute("msg","회원가입이 성공적으로 완료되었습니다.");
-        return "success";
+        return "Signup-Success";
     }
 }

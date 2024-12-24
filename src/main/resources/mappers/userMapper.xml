@@ -7,19 +7,9 @@
     <select id="getAllUsers" >
         SELECT * FROM USER
     </select>
-    <insert id="insertUser">
-        INSERT INTO USER(ID,NAME,PASSWORD,user_verification_answer)
-        VALUES
-            (#{id},#{name},#{password},#{user_verification_answer})
+    <insert id="insertUser" parameterType="com.hermes.hermes.dto.User">
+        INSERT INTO USER (user_reg_num, user_id, user_pw, user_name, user_verification_answer, user_history)
+        VALUES (NULL, #{user_id}, #{user_pw}, #{user_name}, #{user_verification_answer}, #{user_history});
     </insert>
-    <select id="findByUsername">
-        SELECT NAME
-        FROM USER
-        WHERE NAME = #{name}
-    </select>
-
-
-
-
 
 </mapper>

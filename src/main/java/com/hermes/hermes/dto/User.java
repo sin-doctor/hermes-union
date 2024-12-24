@@ -13,9 +13,9 @@ import lombok.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private String id;
-    private String name;
-    private String password;
+    private String user_id;
+    private String user_pw;
+    private String user_name;
     private String user_verification_answer;
-    private String history;
+    private String user_history;
 }

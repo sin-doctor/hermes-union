@@ -1,21 +1,18 @@
 document.getElementById("signupForm").addEventListener("submit", function(event) {
-    const password = document.getElementById("password").value;
+    event.preventDefault(); // 기본 제출 동작 막기
+
+    const password = document.getElementById("user_pw").value;
     const confirmPassword = document.getElementById("confirmPassword").value;
     const message = document.getElementById("message");
-    const securityQuestion = document.getElementById("securityQuestion").value;
-    const securityAnswer = document.getElementById("securityAnswer").value;
 
-    if (password !== confirmPassword) {
-        event.preventDefault();
+    if (password === confirmPassword) {
+        message.textContent = "비밀번호가 일치합니다.";
+        message.className = "success";
+        // 비밀번호가 일치하면 폼 제출
+        this.submit();
+    } else {
         message.textContent = "비밀번호가 일치하지 않습니다. 다시 입력해주세요.";
         message.className = "error";
-    } else if (securityQuestion === "" || securityAnswer.trim() === "") {
-        event.preventDefault();
-        message.textContent = "본인 확인용 질문과 답을 모두 입력해주세요.";
-        message.className = "error";
-    } else {
-        message.textContent = ""; // 오류 메시지 제거
-        message.className = "";
-        // 폼 제출은 정상적으로 진행됩니다.
+        // 비밀번호 불일치 시 제출되지 않음
     }
 });

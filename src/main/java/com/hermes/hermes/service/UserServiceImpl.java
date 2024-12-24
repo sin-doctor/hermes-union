@@ -20,11 +20,11 @@ public class UserServiceImpl implements UserService {
         List<User> userList = userMapper.getAllUsers();
         return userList.stream().map(user -> {
             Map<String, Object> userMap = new HashMap<>();
-            userMap.put("userId", user.getId());
-            userMap.put("username", user.getName());
-            userMap.put("userPw", user.getPassword());
+            userMap.put("userId", user.getUser_id());
+            userMap.put("username", user.getUser_name());
+            userMap.put("userPw", user.getUser_pw());
             userMap.put("user_verification_answer",user.getUser_verification_answer());
-            userMap.put("history",user.getHistory());
+            userMap.put("user_history",user.getUser_history());
             return userMap;
         }).collect(Collectors.toList());
     }
