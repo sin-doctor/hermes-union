@@ -12,4 +12,8 @@
         VALUES (NULL, #{user_id}, #{user_pw}, #{user_name}, #{user_verification_answer}, #{user_history});
     </insert>
 
+    <select id="My_Page_Current_User_Info">
+        SELECT *
+        FROM USERPROFILE
+    </select>
 </mapper>
