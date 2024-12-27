@@ -14,9 +14,7 @@ public interface UserMapper {
     void insertUser(User user);
 
     // 유저의 등록번호를 받아 해당 유저의 전체 정보를 받아옴
-    static User My_Page_Get_User_Info(int reg_num) {
-        return null;
-    }
+    User My_Page_Get_User_Info(int reg_num);
 
     // My_Page 에서 History(구매내역) 보여주기 위해서 모든 구매 내역 조회
     List<Purchase> My_Page_GetAllPurchase();
