@@ -9,9 +9,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
-import java.util.List;
-import java.util.Map;
-
 
 @Controller
 public class IndexController {
@@ -20,27 +17,27 @@ public class IndexController {
 
 
 
-    @GetMapping("/Signup")
+    @GetMapping("/signup")
     public String signup() {
-        return "Signup";
+        return "signup";
     }
 
-    @GetMapping("/Login")
+    @GetMapping("/login")
     public String login() {
-        return "Login";
+        return "login";
     }
-    @GetMapping("/Login-search")
-    public String search() {
-        return "Search";
+    @GetMapping("/login_search")
+    public String loginBySearch() {
+        return "login_search";
     }
 
-    @PostMapping("/Signup-Success")
+    @PostMapping("/signup-success")
     public String signup(@ModelAttribute User user) {
         if (user.getUser_id() == null || user.getUser_id().isEmpty()) {
             throw new IllegalArgumentException("User ID is required");
         }
 
         userService.insertUser(user);
-        return "Signup-Success";
+        return "signup-Success";
     }
 }

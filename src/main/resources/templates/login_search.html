@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>계정 복구</title>
+    <link href="/css/styles.css" rel="stylesheet">
     <style>
         body {
             display: flex;
@@ -11,14 +12,31 @@
             align-items: center;
             height: 100vh;
         }
-        .login-search-container {
+        .login_search_container {
             margin-top: 50px;
             width: 300px;
             padding: 50px;
             background: #ffffff;
         }
-        input,
-        select {
+        .login_search_form {
+            display: flex;
+            flex-direction: column;
+        }
+        .login_search_form label {
+            font-size: 14px;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        .login_search_form input{
+            height: 40px;
+            margin-bottom: 15px;
+            padding: 0 10px;
+            border: 1px solid white;
+            border-radius: 4px;
+            font-size: 14px;
+            border-bottom: 1px solid #ccc;
+        }
+        .login_search_form select{
             width: 100%;
             padding: 10px;
             margin: 10px 0;
@@ -43,9 +61,9 @@
 </head>
 <body>
 <th:block th:replace="~{layout/header :: header}"></th:block>
-<div class="login-search-container">
+<div class="login_search_container">
 
-    <form id="recovery-form">
+    <form class="login_search_form" id="recovery-form">
         <label for="username">사용자 이름:</label>
         <input
                 type="text"
@@ -64,7 +82,7 @@
         <label for="answer">답변:</label>
         <input type="text" id="answer" placeholder="답변 입력" required />
 
-        <button type="button" onclick="recoverAccount()">계정 복구</button>
+        <button type="button" onclick="recoverAccount()">입력 완료</button>
     </form>
 
 </div>
@@ -76,7 +94,7 @@
         securityAnswers: {
             question: "서울"
         },
-        resetUrl: "http://localhost:8080/Login", // 아이디/비밀번호 찾기 결과 페이지 URL
+        resetUrl: "http://localhost:8080/login", // 아이디/비밀번호 찾기 결과 페이지 URL
     };
 
     function recoverAccount() {
