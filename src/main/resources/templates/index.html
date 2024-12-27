@@ -1,16 +1,51 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xml:th="http://www.thymeleaf.org" lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Hermes</title>
     <link href="/css/styles.css" rel="stylesheet">
+    <style>
+        .index_main {
+            text-align: center;
+        }
+        .index_mainImage {
+            height: 70%;
+            width: 80%;
+            border: 1px solid black;
+            margin: 20px;
+            border-radius: 30px;
+
+        }
+        .index_ImageList{
+            width: 150px;
+            height: 220px;
+            border: 1px solid black;
+            margin: 5px;
+
+        }
+        .index_List {
+            display: flex;
+            justify-content: space-evenly;
+        }
+    </style>
 </head>
 <body>
-<th:block th:replace="header :: header"></th:block>
+<th:block th:replace="~{layout/header :: header}"></th:block>
+<div class="index_container">
+    <div class="index_main">
+        <img class="index_mainImage" th:src="${productId}">
+    </div>
+    <div class="index_List">
+        <img class="index_ImageList" src="/images/shose1.jpg">
+        <img class="index_ImageList" src="/images/shose2.jpg">
+        <img class="index_ImageList" src="/images/shose3.jpg">
+        <img class="index_ImageList" src="/images/shose4.jpg">
+        <img class="index_ImageList" src="/images/shose5.jpg">
+    </div>
+</div>
 
-
-<th:block th:replace="footer :: footer"></th:block>
+<th:block th:replace="~{layout/footer :: footer}"></th:block>
 
 
 </body>

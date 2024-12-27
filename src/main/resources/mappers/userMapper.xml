@@ -16,4 +16,16 @@
         SELECT *
         FROM USERPROFILE
     </select>
+
+    <select id="getImage">
+        SELECT PRODUCT_IMAGE
+        FROM PRODUCT
+        WHERE PRODUCT_REG_NUM = #{productId}
+    </select>
+
+    <select id="findByUsername">
+        SELECT NAME
+        FROM USER
+        WHERE NAME = #{name}
+    </select>
 </mapper>

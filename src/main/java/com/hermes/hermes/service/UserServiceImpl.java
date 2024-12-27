@@ -1,10 +1,12 @@
 package com.hermes.hermes.service;
-
+import com.hermes.hermes.dto.Product;
 import com.hermes.hermes.dto.User;
-import com.hermes.hermes.mapper.UserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import com.hermes.hermes.mapper.UserMapper;
+import org.springframework.ui.Model;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -31,5 +33,10 @@ public class UserServiceImpl implements UserService {
     @Override
     public void insertUser(User user){
         userMapper.insertUser(user);
+    }
+
+    @Override
+    public String getImage(int productId) {
+        return userMapper.getImage(productId);
     }
 }
