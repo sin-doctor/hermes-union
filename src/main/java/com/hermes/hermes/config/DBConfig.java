@@ -25,7 +25,6 @@ public class DBConfig {
     @Bean
     @ConfigurationProperties(prefix = "spring.datasource.hikari")
     public HikariConfig hikariConfig() {
-
         return new HikariConfig();
     }
 
@@ -35,17 +34,18 @@ public class DBConfig {
         DataSource dataSource = new HikariDataSource(config);
         return dataSource;
     }
+
     @Bean
-    public SqlSessionFactory sessionFactory(DataSource dataSource) throws Exception{
+    public SqlSessionFactory sessionFactory(DataSource dataSource) throws Exception {
 
         SqlSessionFactoryBean sessionFactoryBean = new SqlSessionFactoryBean();
 
         sessionFactoryBean.setDataSource(dataSource);
 
         sessionFactoryBean.setMapperLocations(
-                applicationContext.getResources("classpath:/mappers/**.xml")  );
-         sessionFactoryBean.setTypeAliasesPackage("com.hermes.hermes");
-         sessionFactoryBean.setConfigLocation(
+                applicationContext.getResources("classpath:/mappers/**.xml"));
+        sessionFactoryBean.setTypeAliasesPackage("com.hermes.hermes");
+        sessionFactoryBean.setConfigLocation(
                 applicationContext.getResource("classpath:mybatis-config.xml"));
 
         return sessionFactoryBean.getObject();
@@ -57,7 +57,7 @@ public class DBConfig {
         return new SqlSessionTemplate(factory);
     }
 
-@Bean
+    @Bean
     public DataSourceTransactionManager
     dataSourceTransactionManager(DataSource dataSource) {
         return new DataSourceTransactionManager(dataSource);

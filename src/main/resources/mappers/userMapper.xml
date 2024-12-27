@@ -4,12 +4,9 @@
 
 <mapper namespace="com.hermes.hermes.mapper.UserMapper">
 
-    <select id="getAllUsers" >
-        SELECT * FROM USERPROFILE
+    <select id="My_Page_Current_User_Info">
+        SELECT *
+        FROM USERPROFILE
     </select>
-
-
-
-
 
 </mapper>

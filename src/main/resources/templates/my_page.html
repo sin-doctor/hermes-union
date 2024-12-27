@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hermes - My Page</title>
+    <link href="/css/styles.css" rel="stylesheet">
+</head>
+<body>
+<th:block th:replace="header :: header"></th:block>
+
+
+<div class="MY_Page-container">
+
+
+    <h1>회원 정보 보기</h1>
+
+
+    <div class="MY_Page_Current_User_Info"> <!-- 현재 로그인한 유저 정보 표시하는 영역 -->
+        <!-- 현재 유저 정보 받아오기(임시) -->
+
+        <a th:text="${user.user_id}"></a> <!-- 현재 로그인한 유저 id 표시 -->
+        <a th:text="${user.user_name}"></a> <!-- 현재 로그인한 유저 이름 표시 -->
+    </div>
+
+    <h1>구매 기록 보기</h1>
+
+
+    <div class="My_Page_Current_User_History"> <!-- 현재 로그인한 유저 구매 기록 표시하는 영역-->
+<!--        <a th:text="${user.history}"></a>  현재 로그인한유저 구매 기록 표시 -->
+    </div>
+
+
+</div>
+<th:block th:replace="footer :: footer"></th:block>
+
+
+</body>
+</html>
