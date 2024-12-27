@@ -24,23 +24,32 @@ public class IndexController {
         return "index";
     }
 
-    @GetMapping("/Signup")
+    @GetMapping("/signup")
     public String signup() {
-        return "Signup";
+        return "signup";
     }
 
-    @PostMapping("/Signup-Success")
+    @GetMapping("/login")
+    public String login() {
+        return "login";
+    }
+    @GetMapping("/login_search")
+    public String loginBySearch() {
+        return "login_search";
+    }
+
+    @PostMapping("/signup-success")
     public String signup(@ModelAttribute User user) {
         if (user.getUser_id() == null || user.getUser_id().isEmpty()) {
             throw new IllegalArgumentException("User ID is required");
         }
 
         userService.insertUser(user);
-        return "Signup-Success";
+        return "signup-Success";
     }
 
-    @GetMapping("/Product_Details_Page")
+    @GetMapping("/product_Details_Page")
     public String Product_Details_Page(Model model) {
-        return "Product_Details_Page";
+        return "product_Details_Page";
     }
 }
