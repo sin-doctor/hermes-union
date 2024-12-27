@@ -29,6 +29,10 @@ public class IndexController {
     public String login() {
         return "Login";
     }
+    @GetMapping("/Login-search")
+    public String search() {
+        return "Search";
+    }
 
     @PostMapping("/Signup-Success")
     public String signup(@ModelAttribute User user) {
