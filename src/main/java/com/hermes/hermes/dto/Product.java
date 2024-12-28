@@ -12,6 +12,7 @@ import java.sql.Blob;
 @Setter
 @ToString
 public class Product {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int product_reg_num;

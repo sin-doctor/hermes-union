@@ -6,26 +6,30 @@
     <title>Hermes-Product_Details_Page</title>
     <link href="/css/styles.css" rel="stylesheet">
     <style>
+        /* 제품 컨테이너 */
         .product-container {
             display: flex;
-            justify-content: center;
+            justify-content: flex-start; /* 왼쪽 정렬 */
             align-items: flex-start;
             padding: 40px;
             max-width: 1200px;
             margin: 0 auto;
+            gap: 40px; /* 이미지와 제품 세부 정보 간 간격 */
         }
 
+        /* 제품 이미지 */
         .product-image {
-            width: 300px;
-            height: 300px;
+            width: 350px;  /* 크기 조정 */
+            height: 350px; /* 크기 조정 */
             object-fit: contain;
-            margin-right: 40px;
         }
 
+        /* 제품 상세 정보 */
         .product-details {
             display: flex;
             flex-direction: column;
-            justify-content: space-between;
+            justify-content: flex-start;
+            max-width: 500px; /* 세부 정보 최대 너비 설정 */
         }
 
         .product-details h1 {
@@ -44,6 +48,7 @@
             color: #666;
         }
 
+        /* 사이즈 선택 스타일 */
         .size-selector {
             margin-bottom: 20px;
         }
@@ -55,6 +60,7 @@
             border-radius: 5px;
         }
 
+        /* 구매 버튼 스타일 */
         .buy-button {
             background-color: green;
             color: white;
@@ -76,24 +82,24 @@
 
 <div class="product-container">
     <div class="product-image">
-        <img th:src="@{/{productId}/image}" alt="제품 이미지" />
+        <img th:src="@{/{product}/image}" alt="제품 이미지" />
     </div>
     <div class="product-details">
-        <h1 th:text="${product.name}">제품명</h1>
-        <p>가격: <strong th:text="${product.price}">₩XX,XXX</strong></p>
+        <h1 th:text="${product.getProduct_name()}">제품명</h1>
+        <p>가격: <strong th:text="${product.getProduct_price()}">₩XX,XXX</strong></p>
         <div class="product-description">
-            <p th:text="${product.description}">상품 간략 설명</p>
+            <p th:text="${product.getProduct_description()}">상품 간략 설명</p>
         </div>
+
         <div class="size-selector">
             <label for="size">신발 사이즈 선택:</label>
             <select id="size" name="size">
-                <option th:value="${product.sizes[0]}" th:text="${product.sizes[0]}">250mm</option>
-                <option th:value="${product.sizes[1]}" th:text="${product.sizes[1]}">260mm</option>
-                <option th:value="${product.sizes[2]}" th:text="${product.sizes[2]}">270mm</option>
-                <option th:value="${product.sizes[3]}" th:text="${product.sizes[3]}">280mm</option>
+                <option th:each="size : ${sizes}"
+                        th:value="${size}"
+                        th:text="${size + 'mm'}">250mm</option>
             </select>
         </div>
-        <button class="buy-button" th:onclick="|buyProduct(${product.id})|">구매하기</button>
+        <button class="buy-button" th:onclick="|buyProduct(${product.getProduct_reg_num()})|">구매하기</button>
     </div>
 </div>
 

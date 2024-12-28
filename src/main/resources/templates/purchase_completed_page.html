@@ -5,4 +5,41 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Hermes-Product_Details_Page</title>
   <link href="/css/styles.css" rel="stylesheet">
+  <style>
+    .completed-container {
+      text-align: center;
+      padding: 50px;
+      font-family: Arial, sans-serif;
+    }
+    .completed-container h1 {
+      color: green;
+    }
+    .completed-container p {
+      font-size: 1.2em;
+    }
+    .completed-container button {
+      padding: 10px 20px;
+      font-size: 1em;
+      color: white;
+      background-color: green;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+  </style>
 </head>
+
+<body>
+<th:block th:replace="~{layout/header :: header}"></th:block>
+<div class="completed-container">
+  <h1>구매 완료!</h1>
+  <p>구매 ID: <span th:text="${purchase.purchase_id}">P123456789</span></p>
+  <p>구매한 상품 사이즈: <span th:text="${purchase.purchase_product_size}">L</span></p>
+  <p>구매자 ID: <span th:text="${purchase.purchase_user_id}">user123</span></p>
+  <p>구매 날짜: <span th:text="${#dates.format(purchase.purchase_date, 'yyyy-MM-dd HH:mm')}">2024-01-01 12:00</span></p>
+  <p>구매 상태: <span th:text="${purchase.purchase_status}">구매 완료</span></p>
+  <button onclick="window.location.href='/mypage'">구매내역보기</button>
+</div>
+<th:block th:replace="~{layout/footer :: footer}"></th:block>
+</body>
+</html>
