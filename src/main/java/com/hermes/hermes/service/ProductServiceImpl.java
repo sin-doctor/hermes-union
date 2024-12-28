@@ -3,7 +3,6 @@ package com.hermes.hermes.service;
 import com.hermes.hermes.dto.Product;
 import com.hermes.hermes.mapper.ProductMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,29 +11,18 @@ import java.util.List;
 public class ProductServiceImpl implements ProductService {
     // ProductMapper 주입
     private final ProductMapper productMapper;
-    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    public ProductServiceImpl(ProductMapper productMapper, JdbcTemplate jdbcTemplate) {
+    public ProductServiceImpl(ProductMapper productMapper) {
         this.productMapper = productMapper;
-        this.jdbcTemplate = jdbcTemplate;
     }
 
     @Override
     public Product getProduct(int product_reg_num) {
-        // 로그 추가
         Product product = productMapper.getProduct(product_reg_num);
 
-        // 상세 로깅
         if (product == null) {
-            System.out.println("(MYDEBUG) Product not found for ID: " + product_reg_num);
-            // 직접 데이터베이스 확인 쿼리 실행
-            int count = jdbcTemplate.queryForObject(
-                    "SELECT COUNT(*) FROM product WHERE product_reg_num = ?",
-                    Integer.class,
-                    product_reg_num
-            );
-            System.out.println("(MYDEBUG) Record count for this ID: "+ count);
+            System.out.println("(MY_DEBUG) Product not found for ID: " + product_reg_num);
         }
 
         return product;
@@ -71,12 +59,11 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public byte[] getProductImage(int productId) {
+    public String getProductImagePath(int productId) {
         Product product = productMapper.getProduct(productId);
         if (product != null) {
-            return product.getProduct_image();
+            return product.getProduct_image_path();
         }
         return null;
     }
-
 }

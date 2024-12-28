@@ -19,8 +19,8 @@
 
         /* 제품 이미지 */
         .product-image {
-            width: 350px;  /* 크기 조정 */
-            height: 350px; /* 크기 조정 */
+            width: 300px;  /* 크기 조정 */
+            height: 300px; /* 크기 조정 */
             object-fit: contain;
         }
 
@@ -82,7 +82,7 @@
 
 <div class="product-container">
     <div class="product-image">
-        <img th:src="@{/{product}/image}" alt="제품 이미지" />
+        <img th:src="@{${product.getProduct_image_path()}}" alt="제품 이미지" class="product-image" />
     </div>
     <div class="product-details">
         <h1 th:text="${product.getProduct_name()}">제품명</h1>

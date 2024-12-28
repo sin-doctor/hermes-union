@@ -1,15 +1,11 @@
-package com.hermes.hermes.mapper;
+package com.hermes.hermes.service;
 
 import com.hermes.hermes.dto.Product;
-import org.apache.ibatis.annotations.Mapper;
-import org.springframework.data.repository.query.Param;
-
 import java.util.List;
 
-@Mapper
-public interface ProductMapper {
-    // 상품 조회
-    Product getProduct(@Param("product_reg_num") int product_reg_num);
+public interface ProductService {
+    // 단일 상품 조회
+    Product getProduct(int productId);
 
     // 모든 상품 목록 조회
     List<Product> getAllProducts();

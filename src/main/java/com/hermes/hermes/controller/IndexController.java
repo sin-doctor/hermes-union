@@ -28,7 +28,7 @@ public class IndexController {
     // 홈 페이지에 이미지 조회 로직 추가
     @GetMapping("/index/{productId}")
     public String getProductImageForIndex(@PathVariable int productId, Model model) {
-        byte[] productImage = productService.getProductImage(productId);
+        String productImage = userService.getImage(productId);
         if (productImage == null) {
             model.addAttribute("error", "이미지를 찾을 수 없습니다.");
         } else {
@@ -68,7 +68,7 @@ public class IndexController {
     // 제품 상세 페이지
     @GetMapping("/product_details_page/{product_reg_num}")
     public String productDetailsPage(@PathVariable int product_reg_num, Model model) {
-        Product product = productService.getProduct(product_reg_num); // 데이터베이스에서 제품 정보 조회
+        Product product = productService.getProduct(product_reg_num);
         if (product == null) {
             model.addAttribute("error", "상품 정보를 찾을 수 없습니다.");
             return "error";
@@ -79,7 +79,15 @@ public class IndexController {
         model.addAttribute("product", product);
         model.addAttribute("sizes", sizes);
 
-        return "product_details_page"; // 템플릿 이름
+        return "product_details_page";
+    }
+
+    @GetMapping("/purchase_completed_page/{product_reg_num}")
+    public String purchaseCompletedPage(@PathVariable int product_reg_num, Model model) {
+        // todo 로그인 세션 확인 로직 추가 필요
+        Product product = productService.getProduct(product_reg_num);
+        model.addAttribute("product", product);
+        return "purchase_completed_page";
     }
 
     // 카테고리 페이지 이동
@@ -91,7 +99,7 @@ public class IndexController {
     // 제품 이미지 제공 API
     @GetMapping("/{productId}/image")
     @ResponseBody
-    public byte[] getProductImage(@PathVariable int productId) {
-        return productService.getProductImage(productId);
+    public String getProductImage(@PathVariable int productId) {
+        return productService.getProductImagePath(productId);
     }
 }
