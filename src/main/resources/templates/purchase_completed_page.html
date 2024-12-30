@@ -85,7 +85,7 @@
         <h3 th:text="${product.getProduct_name()}">제품명</h3>
         <p>선택한 사이즈: <span th:text="${selectedSize + 'mm'}">250mm</span></p>
         <p>구매 가격: <strong th:text="${#numbers.formatInteger(product.getProduct_price(), 0, 'COMMA') + '원'}">₩XX,XXX</strong></p>
-        <p>주문 번호: <span th:text="${purchase.order_id}"></span></p>
+        <p>주문 번호: <span th:text="${purchase.getPurchase_order_id()}"></span></p>
         <p>구매 일시: <span th:text="${#dates.format(purchase.purchase_date, 'yyyy-MM-dd HH:mm:ss')}"></span></p>
       </div>
     </div>

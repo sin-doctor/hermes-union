@@ -17,7 +17,7 @@ public class Purchase {
     @GeneratedValue(strategy = GenerationType.IDENTITY) // auto_increment 숫자자동증가임을 설정
     private int purchase_reg_num;
     private int purchase_product_reg_num;
-    private String order_id;
+    private String purchase_order_id;
     private String purchase_product_size;
     private String purchase_user_id;
     private Date purchase_date;
