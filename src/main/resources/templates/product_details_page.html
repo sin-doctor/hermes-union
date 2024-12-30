@@ -15,11 +15,12 @@
             max-width: 1200px;
             margin: 0 auto;
             gap: 40px; /* 이미지와 제품 세부 정보 간 간격 */
+            flex: 1; /* 페이지 내용에 맞게 유동적 크기 */
         }
 
         /* 제품 이미지 */
         .product-image {
-            width: 300px;  /* 크기 조정 */
+            width: 300px; /* 크기 조정 */
             height: 300px; /* 크기 조정 */
             object-fit: contain;
         }
@@ -58,11 +59,13 @@
             font-size: 1em;
             border: 1px solid #ccc;
             border-radius: 5px;
+            width: 100%;
+            max-width: 200px;
         }
 
         /* 구매 버튼 스타일 */
         .buy-button {
-            background-color: green;
+            background-color: #28a745;
             color: white;
             padding: 15px 30px;
             font-size: 1.2em;
@@ -70,19 +73,56 @@
             border-radius: 5px;
             cursor: pointer;
             transition: background-color 0.3s;
+            width: 100%;
+            max-width: 200px;
+            margin-top: 20px;
         }
 
         .buy-button:hover {
-            background-color: darkgreen;
+            background-color: #218838;
+        }
+
+        /* 푸터 스타일 */
+        footer {
+            background-color: #f8f9fa;
+            text-align: center;
+            padding: 20px;
+            font-size: 0.9em;
+            color: #555;
+            margin-top: auto; /* 푸터를 화면 하단에 고정 */
+        }
+
+        /* 모바일 반응형 디자인 */
+        @media (max-width: 768px) {
+            .product-container {
+                flex-direction: column;
+                align-items: center;
+                padding: 20px;
+            }
+
+            .product-image {
+                width: 80%;
+                height: auto;
+            }
+
+            .product-details {
+                width: 100%;
+                text-align: center;
+            }
+
+            .buy-button {
+                width: 100%;
+            }
         }
     </style>
 </head>
 <body>
+
 <th:block th:replace="~{layout/header :: header}"></th:block>
 
 <div class="product-container">
     <div class="product-image">
-        <img th:src="@{${product.getProduct_image_path()}}" alt="제품 이미지" class="product-image" />
+        <img th:src="@{${product.getProduct_image_path()}}" alt="제품 이미지" class="product-image"/>
     </div>
     <div class="product-details">
         <h1 th:text="${product.getProduct_name()}">제품명</h1>
@@ -91,18 +131,23 @@
             <p th:text="${product.getProduct_description()}">상품 간략 설명</p>
         </div>
 
-        <div class="size-selector">
-            <label for="size">신발 사이즈 선택:</label>
-            <select id="size" name="size">
-                <option th:each="size : ${sizes}"
-                        th:value="${size}"
-                        th:text="${size + 'mm'}">250mm</option>
-            </select>
-        </div>
-        <button class="buy-button" th:onclick="|buyProduct(${product.getProduct_reg_num()})|">구매하기</button>
+        <form action="/purchase_completed_page" method="post">
+            <div class="size-selector">
+                <label for="size">신발 사이즈 선택:</label>
+                <select id="size" name="size">
+                    <option th:each="size : ${sizes}"
+                            th:value="${size}"
+                            th:text="${size + 'mm'}">250mm
+                    </option>
+                </select>
+            </div>
+            <input type="hidden" name="productId" th:value="${product.getProduct_reg_num()}"/>
+            <button type="submit" class="buy-button">구매하기</button>
+        </form>
     </div>
 </div>
 
 <th:block th:replace="~{layout/footer :: footer}"></th:block>
+
 </body>
 </html>

@@ -23,4 +23,6 @@ public interface UserMapper {
     int My_Page_Current_User_reg_num();
 
     String getImage(int productId);
+
+    User findByUserId(String userId);
 }

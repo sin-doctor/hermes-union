@@ -28,4 +28,8 @@
         FROM USER
         WHERE NAME = #{name}
     </select>
+
+    <select id="findByUserId" parameterType="String" resultType="com.hermes.hermes.dto.User">
+        SELECT * FROM user WHERE user_id = #{userId}
+    </select>
 </mapper>

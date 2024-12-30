@@ -11,4 +11,6 @@ public interface UserService {
     List<Map<String, Object>> getAllUsers();
     void insertUser(User user);
     String getImage(int productId);
+
+    User loginUser(String userId, String password);
 }
