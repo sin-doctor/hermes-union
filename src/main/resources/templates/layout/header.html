@@ -10,8 +10,8 @@
         <a href="#">CROCS</a>
     </nav>
     <div class="sign-in">
-        <a th:if="${session.user == null}" href="/login">Sign In</a> <!-- 로그인 상태가 아니면 'Sign In' 표시 -->
-        <a th:if="${session.user != null}" href="/logout">Log Out</a> <!-- 로그인 상태면 'Log Out' 표시 -->
+        <a th:if="${session.userId == null}" href="/login">Sign In</a> <!-- 로그인 상태가 아니면 'Sign In' 표시 -->
+        <a th:if="${session.userId != null}" href="/logout">Log Out</a> <!-- 로그인 상태면 'Log Out' 표시 -->
         <img src="/images/user-icon.png" alt="User Icon">
     </div>
 </header>

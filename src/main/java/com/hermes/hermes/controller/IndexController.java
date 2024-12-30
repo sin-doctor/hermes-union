@@ -148,7 +148,7 @@ public class IndexController {
         // 구매 정보 생성
         Purchase purchase = new Purchase();
         purchase.setPurchase_product_reg_num(productRegNum);
-        purchase.setOrder_id(generateOrderId());
+        purchase.setPurchase_order_id(generateOrderId());
         purchase.setPurchase_product_size(selectedSize);
         purchase.setPurchase_user_id(userId);
         purchase.setPurchase_date(new java.util.Date()); // java.util.Date 명시적 사용
